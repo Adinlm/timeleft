@@ -27,14 +27,19 @@
 
     <script>
         var startTime; // Declare variable to store the start time
-        var initialFontSize = 14; // Set your initial font size here
-
+        var initialFontSize = 14; // Set your initial font size heres
+         
         // Function to apply random effects
         function applyRandomEffects() {
           // Generate a random color
           var color = 'rgb(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ')';
           // Apply the random color to the countdown
           document.getElementById('countdown').style.color = color;
+
+          // Generate a random background color
+          var backgroundColor = 'rgb(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ')';
+          // Apply the random background color to the countdown
+          document.getElementById('countdown').style.backgroundColor = backgroundColor;
 
           // Generate a random font size between 14 and 50
           var fontSize = Math.floor(Math.random() * (50 - 14 + 1)) + 14;
@@ -46,6 +51,11 @@
           var randomBorderStyle = borderStyles[Math.floor(Math.random() * borderStyles.length)];
           // Apply the random border style to the countdown
           document.getElementById('countdown').style.border = '3px ' + randomBorderStyle + ' black';
+
+          // Generate a random border radius
+          var borderRadius = Math.floor(Math.random() * 50);
+          // Apply the random border radius to the countdown
+          document.getElementById('countdown').style.borderRadius = borderRadius + 'px';
 
           // Generate a random opacity
           var opacity = Math.random();
@@ -62,7 +72,23 @@
           var fontWeight = Math.floor(Math.random() * (9 - 1 + 1) + 1) * 100; // Generates a random number between 1 and 9, then multiplies by 100 to get a valid font weight
           // Apply the random font weight to the countdown
           document.getElementById('countdown').style.fontWeight = fontWeight;
+
+          // Generate a random rotation degree
+          var rotation = Math.floor(Math.random() * 360);
+          // Apply the random rotation to the countdown
+          document.getElementById('countdown').style.transform = 'rotate(' + rotation + 'deg)';
+
+          // Generate a random transition duration
+          var transitionDuration = Math.random() * 2;
+          // Apply the random transition duration to the countdown
+          document.getElementById('countdown').style.transitionDuration = transitionDuration + 's';
+
+          // Generate a random box-shadow
+          var boxShadow = Math.floor(Math.random() * 10) + 'px ' + Math.floor(Math.random() * 10) + 'px ' + Math.floor(Math.random() * 20) + 'px rgba(0,0,0,' + Math.random() + ')';
+          // Apply the random box-shadow to the countdown
+          document.getElementById('countdown').style.boxShadow = boxShadow;
         }
+
 
         // Add an event listener to the form to handle the submit event
         document.getElementById('timeForm').addEventListener('submit', function(event) {
