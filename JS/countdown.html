@@ -1,0 +1,63 @@
+ 
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <!-- Your HTML goes here -->
+    <div class="container">
+      <form id="timeForm" class="form-group">
+        <label for="time">Time (HH:MM format):</label>
+        <input type="time" id="time" name="time" required class="form-control">
+        <input type="submit" value="Start Countdown" class="btn btn-primary mt-2">
+      </form>
+
+      <div id="countdown" class="mt-4">
+        <span id="countdownHours"></span>:<span id="countdownMinutes"></span>:<span id="countdownSeconds"></span>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and its dependencies jQuery and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('timeForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent form from submitting normally
+
+          var time = document.getElementById('time').value;
+          var targetHours = time.split(':')[0];
+          var targetMinutes = time.split(':')[1];
+
+          var now = new Date();
+          var targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHours, targetMinutes);
+
+          startCountdown(targetDate.getTime());
+        });
+
+        function startCountdown(targetTime) {
+          var countdown = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = targetTime - now;
+
+            var hours = Math.floor(distance / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdownHours').innerHTML = hours;
+            document.getElementById('countdownMinutes').innerHTML = minutes;
+            document.getElementById('countdownSeconds').innerHTML = seconds;
+
+            if (distance < 0) {
+              clearInterval(countdown);
+              document.getElementById('countdown').innerHTML = 'Countdown finished!';
+            }
+          }, 1000);
+        }
+    </script>
+  </body>
+</html>
