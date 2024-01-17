@@ -40,6 +40,28 @@
           var fontSize = Math.floor(Math.random() * (50 - 14 + 1)) + 14;
           // Apply the random font size to the countdown
           document.getElementById('countdown').style.fontSize = fontSize + 'px';
+
+          // Generate a random border style
+          var borderStyles = ['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'];
+          var randomBorderStyle = borderStyles[Math.floor(Math.random() * borderStyles.length)];
+          // Apply the random border style to the countdown
+          document.getElementById('countdown').style.border = '3px ' + randomBorderStyle + ' black';
+
+          // Generate a random opacity
+          var opacity = Math.random();
+          // Apply the random opacity to the countdown
+          document.getElementById('countdown').style.opacity = opacity;
+
+          // Generate a random text decoration
+          var textDecorations = ['underline', 'overline', 'line-through', 'none'];
+          var randomTextDecoration = textDecorations[Math.floor(Math.random() * textDecorations.length)];
+          // Apply the random text decoration to the countdown
+          document.getElementById('countdown').style.textDecoration = randomTextDecoration;
+
+          // Generate a random font weight
+          var fontWeight = Math.floor(Math.random() * (9 - 1 + 1) + 1) * 100; // Generates a random number between 1 and 9, then multiplies by 100 to get a valid font weight
+          // Apply the random font weight to the countdown
+          document.getElementById('countdown').style.fontWeight = fontWeight;
         }
 
         // Add an event listener to the form to handle the submit event
