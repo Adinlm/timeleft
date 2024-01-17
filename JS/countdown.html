@@ -1,4 +1,5 @@
  
+ 
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,7 @@
   </head>
 
   <body>
-    <!-- Your HTML goes here -->
+    <!-- Para editar HTML -->
     <div class="container">
       <form id="timeForm" class="form-group">
         <label for="time">Time (HH:MM format):</label>
@@ -26,37 +27,63 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        document.getElementById('timeForm').addEventListener('submit', function(event) {
-          event.preventDefault(); // Prevent form from submitting normally
+        var startTime; // Declare variable to store the start time
 
+        // Add an event listener to the form to handle the submit event
+        document.getElementById('timeForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the form from submitting normally
+
+          // Get the value of the time input
           var time = document.getElementById('time').value;
+          // Split the time into hours and minutes
           var targetHours = time.split(':')[0];
           var targetMinutes = time.split(':')[1];
 
+          // Get the current date and time
           var now = new Date();
+          // Create a new date with the current date and the target hours and minutes
           var targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHours, targetMinutes);
 
+          // Store the start time
+          startTime = now.getTime();
+
+          // Start the countdown to the target time
           startCountdown(targetDate.getTime());
         });
 
+        // Function to start the countdown
         function startCountdown(targetTime) {
+          // Set an interval to update the countdown every second
           var countdown = setInterval(function() {
+            // Get the current time
             var now = new Date().getTime();
+            // Calculate the difference between the target time and the current time
             var distance = targetTime - now;
 
+            // Calculate the remaining hours, minutes, and seconds
             var hours = Math.floor(distance / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+            // Display the remaining hours, minutes, and seconds
             document.getElementById('countdownHours').innerHTML = hours;
             document.getElementById('countdownMinutes').innerHTML = minutes;
             document.getElementById('countdownSeconds').innerHTML = seconds;
 
+            // Calculate the ratio of the remaining time to the total time
+            var ratio = distance / (targetTime - startTime);
+            // Calculate the red and green components of the color
+            var red = Math.floor(255 * ratio);
+            var green = Math.floor(255 * (1 - ratio));
+            // Set the color of the countdown
+            document.getElementById('countdown').style.color = 'rgb(' + red + ', ' + green + ', 0)';
+
+            // If the countdown is finished, display a message and stop the interval
             if (distance < 0) {
               clearInterval(countdown);
               document.getElementById('countdown').innerHTML = 'Countdown finished!';
             }
-          }, 1000);
+          }, 1000); // The interval is set to run every 1000 milliseconds (1 second)
         }
     </script>
   </body>
